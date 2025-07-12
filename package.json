@@ -1,0 +1,16 @@
+{
+  "name": "timecraft-extension",
+  "version": "1.0.0",
+  "description": "TimeCraft panel extension for GitHub stand-ups",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3"
+  },
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

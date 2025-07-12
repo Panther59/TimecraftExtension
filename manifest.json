@@ -1,0 +1,15 @@
+
+{
+  "manifest_version": 3,
+  "name": "TimeCraft Panel",
+  "version": "1.0",
+  "description": "Panel for time tracking during stand-up meetings.",
+  "permissions": ["scripting", "activeTab"],
+  "host_permissions": ["*://github.com/*"],
+  "content_scripts": [
+    {
+      "matches": ["*://github.com/*"],
+      "js": ["dist/content.js"]
+    }
+  ]
+}
