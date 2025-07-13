@@ -1,4 +1,23 @@
-(function () {
+function waitForHeaderBarAndRun(main: (headerBar: HTMLElement) => void) {
+  const maxWaitMs = 20000;
+  const intervalMs = 300;
+  let waited = 0;
+  const interval = setInterval(() => {
+    const headerBar = document.querySelector('div[data-testid="software-board.header.controls-bar"]') as HTMLElement | null;
+    if (headerBar) {
+      clearInterval(interval);
+      main(headerBar);
+    } else {
+      waited += intervalMs;
+      if (waited >= maxWaitMs) {
+        clearInterval(interval);
+        console.warn("Timecraft: Header bar not found after waiting for 20s. Make sure you are on a Jira board page.");
+      }
+    }
+  }, intervalMs);
+}
+
+waitForHeaderBarAndRun(function(headerBar) {
   if (document.getElementById('timecraft-panel')) return;
 
   let DEFAULT_TIME_SEC = 60;
@@ -134,9 +153,6 @@
   document.head.appendChild(style);
 
   // --- UI ---
-  const headerBar = document.querySelector('.AppHeader-localBar') as HTMLElement | null;
-  if (!headerBar) return;
-
   // Standup Button
   const standupBtn = document.createElement('button') as HTMLButtonElement;
   standupBtn.innerText = "Start Daily Standup";
@@ -561,5 +577,4 @@
     }
     startTimerForUser(btnText);
   });
-
-})();
+});
